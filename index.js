@@ -1,15 +1,25 @@
-const axios = require('axios'); // Only needed if fetching from other URLs
-const express = require("express");
+import * as dotenv from 'dotenv'
+dotenv.config({path: '.env'})
 
-const app = express();
+import express from 'express'
 
-app.get("/", (req, res) => {
-  res.send("Express & vercel");
-});
+import heating from './api/heating'
 
-app.listen(5000, () => {
-  console.log("Running on port 5000.");
-});
+const app = express()
 
-// Export the Express API
-module.exports = app;
+const getAndSend = async (req, res, func) => {
+  try {
+    const data = await func(req.params)
+    res.send(data)
+  } catch(err) {
+    console.log(err)
+  }
+}
+
+app.get('/', (req, res) => { res.send(`Available paths:
+/heating
+`) })
+
+app.get(`/heating${process.env.HASH}`, async (req, res) => await getAndSend(req, res, heating.setHeating))
+
+app.listen(3000, () => console.log('LISTENING ON 3000'))

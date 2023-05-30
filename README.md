@@ -1,5 +1,15 @@
-# vercel-be-express-starter
+# ecohuman-controls
 
-A starter project for a simple API deployed on Vercel.
+Various utility functions.
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmcclowes%2Fvercel-be-express-starter)
+## Running the code
+
+Dev
+```
+npm run develop
+```
+
+Prod
+```
+npm run start
+```
